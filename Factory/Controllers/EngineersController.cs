@@ -16,11 +16,10 @@ namespace FactoryManager.Controllers
     {
       _db = db;
     }
-    public ActionResult Index()
-    {
-      List<Engineer> engineers = _db.Engineers.ToList();
-      return View(engineers);
-    }
+   
+    List<Engineer> AllEngineers() => _db.Engineers.ToList();
+    public void AddNewEngineerMachine(int machineId, int EngineerId) =>  _db.EngineerMachines.Add(new EngineerMachine() { EngineerId = EngineerId, MachineId = machineId });
+    public ActionResult Index() => View(AllEngineers());
      public ActionResult Create()
     {
       ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "ModelName");
@@ -33,7 +32,7 @@ namespace FactoryManager.Controllers
       _db.SaveChanges();
       if (MachineId != 0)
       {
-        _db.EngineerMachines.Add(new EngineerMachine() { MachineId = MachineId, EngineerId = engineer.EngineerId });
+        AddNewEngineerMachine(MachineId, engineer.EngineerId);
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -70,13 +69,13 @@ namespace FactoryManager.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Engineer e, int MachineId)
+    public ActionResult Edit(Engineer engineer, int MachineId)
     {
       if (MachineId != 0)
       {
-        _db.EngineerMachines.Add(new EngineerMachine() { EngineerId = e.EngineerId, MachineId = MachineId });
+         AddNewEngineerMachine(MachineId, engineer.EngineerId);
       }
-      _db.Entry(e).State = EntityState.Modified;
+      _db.Entry(engineer).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
