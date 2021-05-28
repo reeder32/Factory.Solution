@@ -1,0 +1,16 @@
+@model FactoryManager.Models.Engineer
+<header>
+  Delete Engineer
+</header>
+
+<main>
+  <h3>Are you sure you want to delete @Html.DisplayNameFor(model => model.Name)</h3>
+  @using (Html.BeginForm())
+  {
+    <input type="submit" value="Delete" />
+  }
+</main>
+
+<footer>
+  @Html.ActionLink("Back", "Index")
+</footer>

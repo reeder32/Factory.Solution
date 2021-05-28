@@ -2,14 +2,16 @@
 using FactoryManager.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FactoryManagerProject.Migrations
 {
     [DbContext(typeof(FactoryManagerContext))]
-    partial class FactoryManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20210528173054_RequiredNameForEngineer")]
+    partial class RequiredNameForEngineer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

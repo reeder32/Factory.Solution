@@ -1,0 +1,27 @@
+@using FactoryManager.Models;
+@model List<FactoryManager.Models.Machine>
+
+<header>
+  <h1>Enginners</h1>
+</header>
+
+<main>
+  @if (Model.Count == 0)
+  {
+    <h3>No machines to display</h3>
+  }
+  else
+  {
+    @foreach (Machine m in Model)
+    {
+      <p>
+        @Html.ActionLink($"{m.ModelName}", "Details", new {id = m.MachineId}) | @m.Details
+        <hr>
+      </p>
+
+    }
+  }
+</main>
+<footer>
+  @Html.ActionLink("Add new machine", "Create")
+</footer>

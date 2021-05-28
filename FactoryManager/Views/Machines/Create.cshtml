@@ -1,0 +1,19 @@
+@model FactoryManager.Models.Machine
+
+<header>
+  <h1>Create new Machine</h1>
+</header>
+
+<main>
+  @using (Html.BeginForm())
+  {
+    @Html.LabelFor(model => model.ModelName)
+    @Html.TextBoxFor(model => model.ModelName, new { required = true})
+    @Html.LabelFor(model => model.Details)
+    @Html.TextBoxFor(model => model.Details)
+    @Html.DropDownList("EngineerId")
+    <input type="submit" value="Add new Machine" />
+  }
+</main>
+
+<footer></footer>
