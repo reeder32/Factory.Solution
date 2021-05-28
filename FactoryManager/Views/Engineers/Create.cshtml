@@ -1,7 +1,19 @@
 @model FactoryManager.Models.Engineer
 
-<header></header>
+<header>
+  <h1>Create new Engineer</h1>
+</header>
 
-<main></main>
+<main>
+  @(Html.BeginForm())
+  {
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+  @Html.LabelFor(model => model.Details)
+  @Html.TextBoxFor(model => model.Details)
+  @Html.DropDownList("MachineId")
+  <input type="submit" value="Add new Engineer" />
+  }
+</main>
 
 <footer></footer>
