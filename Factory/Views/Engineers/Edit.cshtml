@@ -11,6 +11,8 @@
 
   @Html.LabelFor(model => model.Name)
   @Html.EditorFor(model => model.Name)
+  @Html.LabelFor(model => model.Details)
+  @Html.EditorFor(model => model.Details)
   <h3>Change/Add Machine</h3>
   @Html.DropDownList("MachineId")
   <input type="submit" value="Save" />
@@ -19,7 +21,7 @@
 <ul>
   @foreach (var em in Model.EngineerMachines)
   {
-    @using (Html.BeginForm("DeleteMachine", "Engineers"))
+    @using (Html.BeginForm("DeleteMachine", "Engineers", new { id = Model.EngineerId }))
     {
       <li>@em.Machine.ModelName</li>
       @Html.Hidden("machineId", @em.EngineerMachineId)
