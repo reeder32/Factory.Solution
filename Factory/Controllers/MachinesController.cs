@@ -16,7 +16,6 @@ namespace FactoryManager.Controllers
     {
       _db = db;
     }
-
     List<Machine> AllMachines() => _db.Machines.ToList();
     public void AddNewEngineerMachine(int machineId, int EngineerId) =>  _db.EngineerMachines.Add(new EngineerMachine() { MachineId = machineId, EngineerId = EngineerId });
     public ActionResult Index() => View(AllMachines());
