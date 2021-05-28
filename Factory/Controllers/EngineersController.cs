@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using FactoryManager.Models;
 
 namespace FactoryManager.Controllers
@@ -59,6 +60,33 @@ namespace FactoryManager.Controllers
       _db.Engineers.Remove(e);
       _db.SaveChanges();
 
+      return RedirectToAction("Index");
+    }
+    public ActionResult Edit(int id)
+    {
+      var e = _db.Engineers.FirstOrDefault(e => e.EngineerId == id);
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "ModelName");
+      return View(e);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Engineer e, int MachineId)
+    {
+      if (MachineId != 0)
+      {
+        _db.EngineerMachines.Add(new EngineerMachine() { EngineerId = e.EngineerId, MachineId = MachineId });
+      }
+      _db.Entry(e).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+       [HttpPost]
+    public ActionResult DeleteMachine(int machineId)
+    {
+      Console.WriteLine(machineId);
+      var em = _db.EngineerMachines.FirstOrDefault(em => em.EngineerMachineId == machineId);
+      _db.EngineerMachines.Remove(em);
+      _db.SaveChanges();
       return RedirectToAction("Index");
     }
   }

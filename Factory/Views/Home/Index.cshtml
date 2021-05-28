@@ -1,0 +1,39 @@
+@using FactoryManager.Models
+
+<header>
+  <h1>Factory Manager</h1>
+</header>
+
+<main>
+  @if (@Model["engineers"].Count == 0)
+  {
+    @Html.ActionLink("Add New Engineer", "Create", "Engineers")
+  }
+  else
+  {
+    <ul>
+      @foreach (Engineer e in @Model["engineers"])
+      {
+        @Html.ActionLink($"{e.Name}", "Details", "Engineers", new { id = e.EngineerId})
+      }
+    </ul>
+  }
+  @if (@Model["machines"].Count == 0)
+  {
+    @Html.ActionLink("Add New Machine", "Create", "Machines")
+  }
+  else
+  {
+    <ul>
+      @foreach (Machine m in @Model["machines"])
+      {
+        @Html.ActionLink($"{m.ModelName}", "Details", "Machines", new { id = m.MachineId})
+      }
+    </ul>
+  }
+</main>
+
+<footer>
+  @Html.ActionLink("Engineers", "Index", "Engineers")
+  @Html.ActionLink("Machines", "Index", "Machines")
+</footer>

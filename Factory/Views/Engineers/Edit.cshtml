@@ -1,0 +1,30 @@
+@model FactoryManager.Models.Engineer
+
+<header>
+  <h2>Edit</h2>
+  <h4>Edit this Engineer: @Html.DisplayFor(model => model.Name)</h4>
+</header>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.EngineerId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
+  <h3>Change/Add Machine</h3>
+  @Html.DropDownList("MachineId")
+  <input type="submit" value="Save" />
+}
+<h3>Delete Machine</h3>
+<ul>
+  @foreach (var em in Model.EngineerMachines)
+  {
+    @using (Html.BeginForm("DeleteMachine", "Engineers"))
+    {
+      <li>@em.Machine.ModelName</li>
+      @Html.Hidden("machineId", @em.EngineerMachineId)
+
+      <input type="submit" value="x" />
+    }
+  }
+</ul>
