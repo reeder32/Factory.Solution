@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
-
-namespace Factory.Models
+namespace FactoryManager.Models
 {
-  public class Engineer
+  public class Machine
   {
-    public Engineer()
+     public Machine()
     {
       EngineerMachines = new HashSet<EngineerMachine>();
     }
-    public int EngineerId { get; set; }
-    public string Name { get; set; }
-    public string Details { get; set; }    
+    public int MachineId { get; set; }
+    public string ModelName { get; set; }
+    public string Details { get; set; }  
     public virtual ICollection <EngineerMachine> EngineerMachines {get; set; }
-
   }
 }

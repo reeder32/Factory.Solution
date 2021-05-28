@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Factory.Models
+namespace FactoryManager.Models
 {
-  public class FactoryContext : DbContext
+  public class FactoryManagerContext : DbContext
   {
     public virtual DbSet<Machine> Machines { get; set; }
-    public DbSet<Enginner> Engineers { get; set; }
+    public DbSet<Engineer> Engineers { get; set; }
     public DbSet<EngineerMachine> EngineerMachines { get; set; }
-    public FactoryContext(DbContextOptions options) : base(options) { }
+    public FactoryManagerContext(DbContextOptions options) : base(options) { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       optionsBuilder.UseLazyLoadingProxies();
