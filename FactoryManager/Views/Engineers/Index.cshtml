@@ -1,0 +1,28 @@
+@using FactoryManager.Models;
+@model List<FactoryManager.Models.Engineer>
+
+<header>
+  <h1>Enginners</h1>
+</header>
+
+<main>
+  @if (Model.Count == 0)
+  {
+    <h3>No engineers to display</h3>
+  }
+  else
+  {
+    @foreach (Engineer e in Model)
+    {
+      <p>
+        @Html.ActionLink($"{e.Name}", "Details", new {id = e.EngineerId})
+        <hr>
+        e.Details
+      </p>
+
+    }
+  }
+</main>
+<footer>
+  @Html.ActionLink("Add new engineer", "Create")
+</footer>
