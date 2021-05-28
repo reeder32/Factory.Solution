@@ -1,0 +1,26 @@
+@model FactoryManager.Models.Machine
+<header>
+  <h2>Machine details:</h2>
+</header>
+<main>
+  <hr />
+  <h3>@Html.DisplayNameFor(model => model.ModelName): @Html.DisplayFor(model => model.Details)</h3>
+
+  @if (Model.EngineerMachines.Count == 0)
+  {
+    <p>This Machine does not belong to any Engineers</p>
+  }
+  else
+  {
+    <h4>Engineers who operate on this machine: </h4>
+    <ul>
+      @foreach (var em in Model.EngineerMachines)
+      {
+        <li>@em.Engineer.Name</li>
+      }
+    </ul>
+  }
+</main>
+<footer>
+  @Html.ActionLink("Delete Machine", "Delete", new { id = Model.MachineId })
+</footer>

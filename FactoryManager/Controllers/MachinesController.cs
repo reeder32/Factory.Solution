@@ -39,8 +39,26 @@ namespace FactoryManager.Controllers
     }
      public ActionResult Details(int id)
     {
-     
-      return View();
+      var machine = _db.Machines
+      .Include(machine => machine.EngineerMachines)
+      .ThenInclude(em => em.Engineer)
+      .FirstOrDefault(machine => machine.MachineId == id);
+      return View(machine);
+    }
+    public ActionResult Delete(int id)
+    {
+      Engineer e = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      return View(e);
+
+    }
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var e = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      _db.Engineers.Remove(e);
+      _db.SaveChanges();
+
+      return RedirectToAction("Index");
     }
   }
 }
