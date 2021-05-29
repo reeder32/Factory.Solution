@@ -38,15 +38,6 @@ cd Factory.Solution
 code .
 ```
 
-```sh
-cd Factory
-dotnet ef migrations add Initial
-```
-
-```sh
-dotnet ef database update
-```
-
 **IMPORTANT**
 
 1. In the root folder create a file 'appsettings.json'
@@ -58,6 +49,15 @@ dotnet ef database update
     "DefaultConnection" : "Server=localhost;Port=3306;database=nick_reeder;uid=root;pwd=epicodus;"
   }
 }
+```
+
+```sh
+cd Factory
+dotnet ef migrations add Initial
+```
+
+```sh
+dotnet ef database update
 ```
 
 #### Run on Browser
