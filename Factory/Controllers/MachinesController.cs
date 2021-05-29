@@ -34,20 +34,15 @@ namespace FactoryManager.Controllers
     
      public ActionResult Create()
     {
-      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
+      
       return View();
     }
     [HttpPost]
-     public ActionResult Create(Machine machine, int EngineerId)
+     public ActionResult Create(Machine machine)
     {
       _db.Machines.Add(machine);
       _db.SaveChanges();
-      if (EngineerId != 0)
-      {
-        AddNewEngineerMachine(machine.MachineId, EngineerId);
-      }
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Edit", new {id = machine.MachineId});
     }
      public ActionResult Details(int id)
     {
@@ -97,7 +92,7 @@ namespace FactoryManager.Controllers
       var em = _db.EngineerMachines.FirstOrDefault(em => em.EngineerMachineId == engineerMachineId);
       _db.EngineerMachines.Remove(em);
       _db.SaveChanges();
-      return RedirectToAction("Details", new {id = id});
+      return RedirectToAction("Edit", new {id = id});
     }
   }
 }

@@ -1,32 +1,41 @@
+@{
+  Layout = "_Layout";
+}
+
 @model FactoryManager.Models.Machine
 
-<he ader>
-  <h2>Edit</h2>
+<header>
   <h4>Edit this Machine: @Html.DisplayFor(model => model.ModelName)</h4>
-  </header>
+</header>
 
-  @using (Html.BeginForm())
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.MachineId)
+
+  @Html.LabelFor(model => model.ModelName)
+  @Html.EditorFor(model => model.ModelName)
+  @Html.LabelFor(model => model.Details)
+  @Html.EditorFor(model => model.Details)
+  <hr>
+  <h3>Change/Add Engineer</h3>
+  @Html.DropDownList("EngineerId")
+  <input type="submit" value="Save" />
+}
+<hr>
+<h3>Delete Engineer</h3>
+<ul class="form-inline">
+  @foreach (var em in Model.EngineerMachines)
   {
-    @Html.HiddenFor(model => model.MachineId)
-
-    @Html.LabelFor(model => model.ModelName)
-    @Html.EditorFor(model => model.ModelName)
-    @Html.LabelFor(model => model.Details)
-    @Html.EditorFor(model => model.Details)
-    <h3>Change/Add Engineer</h3>
-    @Html.DropDownList("EngineerId")
-    <input type="submit" value="Save" />
-  }
-  <h3>Delete Engineer</h3>
-  <ul>
-    @foreach (var em in Model.EngineerMachines)
+    @using (Html.BeginForm("DeleteEngineer", "Machines", new { id = Model.MachineId }))
     {
-      @using (Html.BeginForm("DeleteEngineer", "Machines", new { id = Model.MachineId }))
-      {
-
-        <li>@em.Engineer.Name</li>
+      <div class="form-group ml-4">
+        @em.Engineer.Name
         @Html.Hidden("engineerMachineId", @em.EngineerMachineId)
         <input type="submit" value="x" />
-      }
+      </div>
     }
-  </ul>
+  }
+</ul>
+<footer class="footer">
+  @Html.ActionLink("Back", "Index")
+</footer>

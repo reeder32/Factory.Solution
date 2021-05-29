@@ -1,3 +1,7 @@
+@{
+  Layout = "_Layout";
+}
+
 @using FactoryManager.Models;
 @model List<FactoryManager.Models.Machine>
 
@@ -12,16 +16,19 @@
   }
   else
   {
-    @foreach (Machine m in Model)
-    {
-      <p>
-        @Html.ActionLink($"{m.ModelName}", "Details", new {id = m.MachineId}) | @m.Details
-        <hr>
-      </p>
+    <ul class="form-inline">
+      @foreach (Machine m in Model)
+      {
 
-    }
+        <div class="form-group ml-6">
+          @Html.ActionLink($"{m.ModelName}", "Details", new {id = m.MachineId}) : @m.Details
+        </div>
+        <hr>
+
+      }
+    </ul>
   }
 </main>
-<footer>
+<footer class="footer">
   @Html.ActionLink("Add new machine", "Create")
 </footer>

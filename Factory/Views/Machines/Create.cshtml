@@ -1,3 +1,7 @@
+@{
+  Layout = "_Layout";
+}
+
 @model FactoryManager.Models.Machine
 
 <header>
@@ -5,15 +9,22 @@
 </header>
 
 <main>
-  @using (Html.BeginForm())
-  {
-    @Html.LabelFor(model => model.ModelName)
-    @Html.TextBoxFor(model => model.ModelName, new { required = true})
-    @Html.LabelFor(model => model.Details)
-    @Html.TextBoxFor(model => model.Details)
-    @Html.DropDownList("EngineerId")
-    <input type="submit" value="Add new Machine" />
-  }
+  <div class="form">
+    @using (Html.BeginForm())
+    {
+      <div class="form-group ml-6">
+        @Html.LabelFor(model => model.ModelName)
+        @Html.TextBoxFor(model => model.ModelName, new { required = true})
+      </div>
+      <div class="form-group ml-6">
+        @Html.LabelFor(model => model.Details)
+        @Html.TextBoxFor(model => model.Details)
+      </div>
+      <input type="submit" value="Add new Machine" class="btn-success" />
+    }
+  </div>
 </main>
 
-<footer></footer>
+<footer class="footer">
+  @Html.ActionLink("Back", "Index")
+</footer>

@@ -1,10 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+
 @model FactoryManager.Models.Engineer
+
 <header>
   <h2>Engineer details:</h2>
 </header>
 <main>
   <hr />
-  <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Details)</h3>
+  <h3>@Html.DisplayFor(model => model.Name): @Html.DisplayFor(model => model.Details)</h3>
 
   @if (Model.EngineerMachines.Count == 0)
   {
@@ -16,12 +21,12 @@
     <ul>
       @foreach (var em in Model.EngineerMachines)
       {
-        <li>@em.Machine.ModelName</li>
+        @Html.ActionLink($"{@em.Machine.ModelName}", "Details", "Machines", new {id = em.MachineId})
       }
     </ul>
   }
 </main>
-<footer>
+<footer class="footer">
   @Html.ActionLink("Delete Engineer", "Delete", new { id = Model.EngineerId })
   @Html.ActionLink("Edit Engineer", "Edit", new { id = Model.EngineerId })
 </footer>

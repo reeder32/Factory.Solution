@@ -26,16 +26,11 @@ namespace FactoryManager.Controllers
       return View();
     }
     [HttpPost]
-     public ActionResult Create(Engineer engineer, int MachineId)
+     public ActionResult Create(Engineer engineer)
     {
       _db.Engineers.Add(engineer);
       _db.SaveChanges();
-      if (MachineId != 0)
-      {
-        AddNewEngineerMachine(MachineId, engineer.EngineerId);
-      }
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Edit", new {id = engineer.EngineerId});
     }
      public ActionResult Details(int id)
     {
@@ -80,13 +75,13 @@ namespace FactoryManager.Controllers
       return RedirectToAction("Index");
     }
        [HttpPost]
-    public ActionResult DeleteMachine(int machineId)
+    public ActionResult DeleteMachine(int machineId, int id)
     {
       Console.WriteLine(machineId);
       var em = _db.EngineerMachines.FirstOrDefault(em => em.EngineerMachineId == machineId);
       _db.EngineerMachines.Remove(em);
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Edit", new {id = id});
     }
   }
 }
