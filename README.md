@@ -51,6 +51,17 @@ code .
 }
 ```
 
+---
+
+**FYI**
+If the below command doesn't work, you may not have dotnet -ef command available yet...
+
+```sh
+dotnet tool install --global dotnet-ef
+```
+
+---
+
 ```sh
 cd Factory
 dotnet ef migrations add Initial
